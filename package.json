@@ -19,7 +19,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.6",
-
+    "@badrap/bar-of-progress": "^0.2.2",
     "@reduxjs/toolkit": "^1.8.5",
     "formik": "^2.2.9",
     "i18next": "^22.0.2",
