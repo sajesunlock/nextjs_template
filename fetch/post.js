@@ -4,12 +4,13 @@ export async function postData(url, payload) {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
     },
+    credential: "included",
     mode: "cors",
     cache: "default",
     body: JSON.stringify(payload),
 };
 
-fetch(url, Init)
+  return  fetch(url, Init)
     .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -33,14 +34,15 @@ export async function postDataWithAuth(url, payload, token) {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${token}`,
     },
-    Authorization: `Bearer ${token}`,
+    credential: "included",
     mode: "cors",
     cache: "default",
     body: JSON.stringify(payload),
 };
 
-fetch(url, Init)
+  return fetch(url, Init)
     .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -64,14 +66,15 @@ export async function postBinary(url, payload, token) {
     method: "POST",
     headers: {
       // "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${token}`,
     },
-    Authorization: `Bearer ${token}`,
+   
     mode: "cors",
     cache: "default",
     body: payload, // JSON.stringify(payload),
 };
 
-fetch(url, Init)
+  return fetch(url, Init)
     .then((res) => {
         if (res.status === 200) {
           return res.json();

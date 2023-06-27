@@ -13,8 +13,18 @@ export async function getData(url) {
 };
 
 export async function getDataWithAuth(url, token) {
+    const Init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+      mode: "cors",
+      cache: "default",
+    };
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, Init);
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }

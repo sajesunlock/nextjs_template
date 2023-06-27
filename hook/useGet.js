@@ -3,28 +3,34 @@ import { useState, useEffect } from "react";
 const useGet = (url) => {
     const [data, setData] = useState(false);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+      setLoading(true);
       fetch(url)
         .then((res) => {
             if (res.status === 200) {
               return res.json();
             }
+            setLoading(false);
             return false;
         })
         .then((d) => {
             if (!d || d.error) {
                 setError(d.error);
+                setLoading(false);
                 return false;
             }
+              setLoading(false);
              return setData(d);
         })
         .catch((err) => {
+            setLoading(false);
             setError(err);
         });
     }, [url]);
 
-    return [error, data];
+    return [loading, error, data];
 };
 
 const useGetWithAuth = (url, token) => {
@@ -35,8 +41,8 @@ const useGetWithAuth = (url, token) => {
         const Init = {
             headers: {
               "Content-Type": "application/json;charset=UTF-8",
+              Authorization: `Bearer ${token}`,
             },
-            Authorization: `Bearer ${token}`,
             mode: "cors",
             cache: "default",
         };
